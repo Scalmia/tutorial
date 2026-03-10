@@ -8,7 +8,7 @@ body {
     justify-content: center;
     font-family: 'Malgun Gothic', sans-serif;
     /* 배경색이 바뀔 때 스르륵 변하도록 애니메이션 효과(transition) 부여 */
-    transition: background 1.8s ease, color 1.8s ease;
+    transition: background 4s ease, color 4s ease;
 }
 
 /* 2. 방금 배운 'class'의 완벽한 활용 예시! */

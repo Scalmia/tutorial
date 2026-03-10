@@ -5,11 +5,13 @@ const body = document.body;
 
 // 2. 슬라이더를 움직일 때마다(input) 이 안의 명령을 실행해라!
 slider.addEventListener('input', function () {
-    // 현재 슬라이더의 숫자(시간)를 가져옵니다.
-    const hour = parseInt(this.value);
+    // 현재 슬라이더의 숫자(분 단위 시간)를 가져옵니다.
+    const totalMinutes = parseInt(this.value);
+    const hour = Math.floor(totalMinutes / 60);
+    const minute = totalMinutes % 60;
 
-    // 숫자가 9면 '09:00', 14면 '14:00' 형태로 예쁘게 만듭니다.
-    const formattedTime = hour.toString().padStart(2, '0') + ':00';
+    // 시와 분을 '09:05' 형태로 예쁘게 만듭니다.
+    const formattedTime = hour.toString().padStart(2, '0') + ':' + minute.toString().padStart(2, '0');
     display.textContent = formattedTime; // 화면 시계 업데이트
 
     // 3. 시간대에 따라 <body> 태그의 '명찰(class)'을 뗐다 붙였다 합니다!
