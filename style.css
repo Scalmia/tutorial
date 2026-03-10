@@ -1,0 +1,45 @@
+/* 1. 기본 뼈대와 글씨체 설정 */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Malgun Gothic', sans-serif;
+    /* 배경색이 바뀔 때 스르륵 변하도록 애니메이션 효과(transition) 부여 */
+    transition: background 1.8s ease, color 1.8s ease;
+}
+
+/* 2. 방금 배운 'class'의 완벽한 활용 예시! */
+/* 명찰에 따라 배경색(그라데이션)과 글자색을 미리 지정해 둡니다. */
+.morning {
+    background: linear-gradient(to top, #87CEEB, #E0F6FF);
+    /* 밝은 하늘색 */
+    color: #333;
+}
+
+.afternoon {
+    background: linear-gradient(to top, #FF8C00, #FFD700);
+    /* 노을빛 주황색 */
+    color: white;
+}
+
+.night {
+    background: linear-gradient(to top, #191970, #000000);
+    /* 짙은 밤하늘색 */
+    color: white;
+}
+
+/* 3. 시계와 슬라이더 디자인 */
+#time-display {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#time-slider {
+    width: 300px;
+    cursor: pointer;
+}
