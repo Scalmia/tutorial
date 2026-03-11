@@ -3,32 +3,53 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>시간 여행 시계</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시간 여행 시계</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="morning">
 
-    <div id="time-display">08:00</div>
-    <input type="range" id="time-slider" min="0" max="1439" value="480">
+  <div id="time-display">08:00</div>
+  <input type="range" id="time-slider" min="0" max="1439" value="480">
 
-    <!-- 제휴 문의 폼 -->
-    <div class="contact-form-container">
-        <h3>🤝 제휴 문의</h3>
-        <form action="https://formspree.io/f/maqpeelq" method="POST">
-            <label>
-              이메일 주소
-              <input type="email" name="email" placeholder="example@email.com" required>
-            </label>
-            <label>
-              문의 내용
-              <textarea name="message" rows="3" placeholder="제휴 및 문의 내용을 자유롭게 입력해주세요." required></textarea>
-            </label>
-            <button type="submit">문의 보내기</button>
-        </form>
-    </div>
+  <!-- 제휴 문의 폼 -->
+  <div class="contact-form-container">
+    <h3>🤝 제휴 문의</h3>
+    <form action="https://formspree.io/f/maqpeelq" method="POST">
+      <label>
+        이메일 주소
+        <input type="email" name="email" placeholder="example@email.com" required>
+      </label>
+      <label>
+        문의 내용
+        <textarea name="message" rows="3" placeholder="제휴 및 문의 내용을 자유롭게 입력해주세요." required></textarea>
+      </label>
+      <button type="submit">문의 보내기</button>
+    </form>
+  </div>
+
+  <!-- Disqus 댓글 창 -->
+    <div id="disqus_thread" class="comments-container"></div>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://tutorial-3qmhilxuqp.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
     <script src="script.js"></script>
 </body>
