@@ -14,13 +14,9 @@
   <div id="time-display">08:00</div>
   <input type="range" id="time-slider" min="0" max="1439" value="480">
 
-  <!-- 동물상 테스트 폼 -->
-  <div class="animal-test-container">
-      <h3>🐶 동물상 테스트 🐱</h3>
-      <div style="font-size: 0.9rem; opacity: 0.8;">Teachable Machine Image Model</div>
-      <button type="button" onclick="init()">웹캠으로 테스트 시작하기</button>
-      <div id="webcam-container"></div>
-      <div id="label-container"></div>
+  <!-- 동물상 테스트로 이동하는 버튼 -->
+  <div class="animal-test-link-container">
+      <a href="animal.html" class="animal-test-link">🐶 동물상 테스트 하러 가기 🐱</a>
   </div>
 
   <!-- 제휴 문의 폼 -->
@@ -60,48 +56,7 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    <script type="text/javascript">
-        const URL = "https://teachablemachine.withgoogle.com/models/XcoJq152e/";
 
-        let model, webcam, labelContainer, maxPredictions;
-
-        async function init() {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-
-            const flip = true; // whether to flip the webcam
-            webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-            await webcam.setup(); // request access to the webcam
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            labelContainer = document.getElementById("label-container");
-            for (let i = 0; i < maxPredictions; i++) { // and class labels
-                labelContainer.appendChild(document.createElement("div"));
-            }
-        }
-
-        async function loop() {
-            webcam.update(); // update the webcam frame
-            await predict();
-            window.requestAnimationFrame(loop);
-        }
-
-        async function predict() {
-            const prediction = await model.predict(webcam.canvas);
-            for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction =
-                    prediction[i].className + ": " + Math.round(prediction[i].probability * 100) + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
-            }
-        }
-    </script>
 
     <script src="script.js"></script>
 </body>

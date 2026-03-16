@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동물상 테스트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="morning"> <!-- 재사용 가능한 배경 스타일 -->
+
+    <a href="index.html" class="back-link">⬅ 시계 화면으로 돌아가기</a>
+
+    <div class="animal-test-container" style="margin-top: 20px;">
+        <h3>🐶 동물상 테스트 🐱</h3>
+        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px;">사진을 올려서 당신의 동물상을 확인해보세요!</div>
+        
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        <label for="imageUpload" class="upload-btn">사진 업로드 하기</label>
+        
+        <div id="image-preview" style="margin-top: 20px;"></div>
+        <div id="label-container" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- Teachable Machine Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
+    <script type="text/javascript">
+        const URL = "https://teachablemachine.withgoogle.com/models/XcoJq152e/";
+        let model, labelContainer, maxPredictions;
+
+        // 뒤로 돌아가기 버튼을 위해서 배경 transition을 초기화합니다.
+        document.body.style.transition = 'none';
+
+        async function initModel() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) { 
+                labelContainer.appendChild(document.createElement("div"));
+            }
+        }
+
+        // Initialize the model when the page loads
+        window.addEventListener('load', initModel);
+
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('image-preview');
+
+        imageUpload.addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    // Update preview
+                    imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Preview" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">';
+                    
+                    // Create an image element for prediction
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = async function() {
+                        await predict(img);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function predict(imageElement) {
+            const prediction = await model.predict(imageElement);
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                    prediction[i].className + ": " + Math.round(prediction[i].probability * 100) + "%";
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
+        }
+    </script>
+</body>
+</html>
