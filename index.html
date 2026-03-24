@@ -4,14 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="게임 기획 및 소설 창작을 위한 스토리 내러티브 추천기(Narrative Generator)입니다. 캐릭터, 배경, 목표를 무작위로 조합하여 독창적인 아이디어를 얻어보세요.">
+  <meta name="description"
+    content="게임 기획 및 소설 창작을 위한 스토리 내러티브 추천기(Narrative Generator)입니다. 캐릭터, 배경, 목표를 무작위로 조합하여 독창적인 아이디어를 얻어보세요.">
   <title>Narrative Generator - 스토리 아이디어 추천기</title>
   <link rel="stylesheet" href="style.css">
 
   <!-- Google Adsense -->
   <meta name="google-adsense-account" content="ca-pub-8409907744414724">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8409907744414724"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LQG0Y2EP1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3LQG0Y2EP1');
+  </script>
 </head>
 
 <body class="morning">
@@ -35,10 +45,10 @@
     <section id="home" class="seo-intro-container text-panel">
       <h1>스토리 내러티브 추천기 (Narrative Generator)</h1>
       <p>
-        게임 기획자, 소설가, 웹툰 작가 등 창작자들을 위한 강력한 아이디어 도구입니다. 
-        이 툴은 주인공 스탯, 세계관 배경, 그리고 무작위로 주어지는 최종 목표를 결합하여 
-        당신의 상상력을 자극할 독창적인 시놉시스 초안을 순식간에 만들어냅니다. 
-        단조로운 설정에 갇혀있을 때, 우연성(Randomness)이 부여하는 새로운 관점으로 
+        게임 기획자, 소설가, 웹툰 작가 등 창작자들을 위한 강력한 아이디어 도구입니다.
+        이 툴은 주인공 스탯, 세계관 배경, 그리고 무작위로 주어지는 최종 목표를 결합하여
+        당신의 상상력을 자극할 독창적인 시놉시스 초안을 순식간에 만들어냅니다.
+        단조로운 설정에 갇혀있을 때, 우연성(Randomness)이 부여하는 새로운 관점으로
         독자들을 사로잡을 매력적인 플롯을 구성해 보세요.
       </p>
     </section>
@@ -47,9 +57,9 @@
     <section id="generator" class="generator-container glass-panel">
       <h2>✨ 당신만의 스토리를 발견하세요</h2>
       <p>아래 버튼을 클릭하면 캐릭터(Main Character), 배경(Setting), 목표(Goal)가 무작위로 결합된 새로운 이야기가 탄생합니다.</p>
-      
+
       <button id="generate-btn" class="action-btn">Generate Story (스토리 생성)</button>
-      
+
       <div id="story-output" class="output-box" aria-live="polite">
         <!-- 결과 텍스트가 여기에 출력됩니다 -->
         <p class="placeholder-text">이곳에 당신의 새로운 이야기가 나타납니다.</p>
@@ -86,20 +96,20 @@
     <section id="about" class="seo-outro-container text-panel">
       <h2>이 툴은 어떻게 활용하나요?</h2>
       <p>
-        <strong>1. 게임 퀘스트 기획:</strong> 생성된 짧은 문단을 기반으로 사이드 퀘스트나 메인 에피소드를 확장할 수 있습니다. 
+        <strong>1. 게임 퀘스트 기획:</strong> 생성된 짧은 문단을 기반으로 사이드 퀘스트나 메인 에피소드를 확장할 수 있습니다.
         예를 들어, "기억을 잃은 안드로이드"라는 키워드에서 파생되는 SF 세계관의 핵심 플레이 경험을 설계해 보세요.<br><br>
-        <strong>2. 웹소설 도입부 작성:</strong> 무작위로 주어진 배경과 목표는 주인공에게 즉각적인 동기를 부여합니다. 
+        <strong>2. 웹소설 도입부 작성:</strong> 무작위로 주어진 배경과 목표는 주인공에게 즉각적인 동기를 부여합니다.
         어떤 갈등을 겪으며 목표를 달성할지 빈칸을 채워나가며 글쓰기 근육을 단련할 수 있습니다.<br><br>
-        <strong>3. TRPG 시나리오:</strong> 마스터(GM)로서 즉흥적인 시나리오 훅(Hook)이 필요할 때 활용하면, 
+        <strong>3. TRPG 시나리오:</strong> 마스터(GM)로서 즉흥적인 시나리오 훅(Hook)이 필요할 때 활용하면,
         플레이어들에게 신선하고 예측 불가능한 모험을 선사할 수 있습니다.
       </p>
     </section>
 
     <!-- 기존 요소 유지: 동물상 테스트 링크 -->
     <nav class="animal-test-link-container text-panel">
-        <a href="animal.html" class="animal-test-link">🐶 인공지능 동물상 테스트 하러 가기 🐱</a>
+      <a href="animal.html" class="animal-test-link">🐶 인공지능 동물상 테스트 하러 가기 🐱</a>
     </nav>
-    
+
     <!-- 기존 요소 유지: 제휴 문의 폼 -->
     <section id="contact" class="contact-form-container glass-panel">
       <h3>🤝 제휴 및 피드백 문의</h3>
@@ -131,14 +141,15 @@
 
   <script>
     // Disqus Comments
-    (function() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://tutorial-3qmhilxuqp.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tutorial-3qmhilxuqp.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
     })();
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+      Disqus.</a></noscript>
 
   <script src="script.js"></script>
 </body>
