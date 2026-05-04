@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글래스모피즘 복권 추첨기</title>
+    <style>
+        /* 웹폰트 적용 (Pretendard) */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 글래스모피즘이 돋보이도록 화려한 애니메이션 배경 적용 */
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a18cd1, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 글래스모피즘 메인 컨테이너 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25); /* 반투명 배경 */
+            backdrop-filter: blur(15px); /* 배경 블러 처리 */
+            -webkit-backdrop-filter: blur(15px); /* 사파리 지원 */
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 은은한 흰색 테두리 */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); /* 부드러운 그림자 */
+            padding: 50px 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* 번호가 표시될 영역 */
+        .numbers-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            min-height: 60px;
+            flex-wrap: wrap;
+        }
+
+        /* 개별 번호 공 (글래스 스타일) */
+        .ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            
+            /* 등장 애니메이션 */
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 번호 대역별 색상 (반투명하게 적용하여 글래스 느낌 유지) */
+        .color-1 { background: rgba(253, 203, 110, 0.6); } /* 1~10: 노랑 */
+        .color-2 { background: rgba(9, 132, 227, 0.6); }  /* 11~20: 파랑 */
+        .color-3 { background: rgba(214, 48, 49, 0.6); }  /* 21~30: 빨강 */
+        .color-4 { background: rgba(99, 110, 114, 0.6); } /* 31~40: 회색 */
+        .color-5 { background: rgba(0, 184, 148, 0.6); }  /* 41~45: 초록 */
+
+        /* 추첨 버튼 */
+        button {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-family: inherit;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <h1>행운의 로또 번호</h1>
+        <div class="numbers-container" id="result">
+            <!-- 자바스크립트로 생성된 공들이 여기에 들어갑니다 -->
+        </div>
+        <button id="draw-btn">번호 추첨하기</button>
+    </div>
+
+    <script>
+        const drawBtn = document.getElementById('draw-btn');
+        const resultContainer = document.getElementById('result');
+
+        // 번호에 따른 색상 클래스 반환 함수
+        function getColorClass(number) {
+            if (number <= 10) return 'color-1';
+            if (number <= 20) return 'color-2';
+            if (number <= 30) return 'color-3';
+            if (number <= 40) return 'color-4';
+            return 'color-5';
+        }
+
+        drawBtn.addEventListener('click', () => {
+            // 버튼 연속 클릭 방지 처리
+            drawBtn.disabled = true;
+            resultContainer.innerHTML = ''; // 기존 번호 초기화
+
+            const numbers = new Set();
+            
+            // 1~45 사이의 중복 없는 숫자 6개 생성
+            while (numbers.size < 6) {
+                numbers.add(Math.floor(Math.random() * 45) + 1);
+            }
+
+            // 오름차순 정렬
+            const sortedNumbers = [...numbers].sort((a, b) => a - b);
+
+            // 순차적으로 공 생성 (애니메이션 효과를 위해 시간차를 둠)
+            sortedNumbers.forEach((num, index) => {
+                setTimeout(() => {
+                    const ball = document.createElement('div');
+                    ball.className = `ball ${getColorClass(num)}`;
+                    ball.textContent = num;
+                    resultContainer.appendChild(ball);
+
+                    // 마지막 공이 나타나면 버튼 다시 활성화
+                    if (index === 5) {
+                        setTimeout(() => { drawBtn.disabled = false; }, 500);
+                    }
+                }, index * 200); // 0.2초 간격으로 나타남
+            });
+        });
+    </script>
+</body>
+</html>
